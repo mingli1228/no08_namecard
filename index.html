@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>名刺に書けないことを記録するアプリ</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>名刺に書けないことを記録するアプリ</h1>
+    <button id="toRegister">新規登録</button>
+    <button id="toList">登録一覧</button>
+    <input type="text" id="search" placeholder="名前や会社名で検索（今はダミーです）" />
+    <div id="register">
+        <input type="text" id="name" placeholder="名前" />
+        <input type="text" id="reading" placeholder="読み方" />
+        <input type="text" id="company" placeholder="会社名" />
+        <input type="date" id="date" />
+        <textarea id="note" placeholder="特記事項・メモ"></textarea>
+        <input type="text" id="twitter" placeholder="Twitter ID" />
+        <input type="text" id="facebook" placeholder="Facebook ID" />
+        <input type="text" id="instagram" placeholder="Instagram ID" />
+        <input type="text" id="tiktok" placeholder="TikTok ID" />
+        <input type="text" id="linkedin" placeholder="LinkedIn ID" />
+
+        <button id="submit">登録する</button>
+    </div>
+
+    <div id="list"></div>
+    <script src="main.js"></script>
+</body>
+
+</html>
