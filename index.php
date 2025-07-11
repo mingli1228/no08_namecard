@@ -59,7 +59,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="container">
 
         <header>
-            <h1>名刺に書けないことを記録しよう</h1>
+            <h1>名刺に書けないことを記録するアプリ</h1>
             <a href="register.php" class="btn btn-primary">＋ 新規登録</a>
         </header>
 
@@ -97,26 +97,37 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </tr>
                 <?php else: ?>
                     <?php foreach ($results as $row): ?>
-                        <tr class="row-link" onclick="location.href='edit.php?id=<?= $row['id'] ?>';">
-                            <td><?= htmlspecialchars($row['name']) ?></td>
-                            <td><?= htmlspecialchars($row['reading']) ?></td>
-                            <td><?= htmlspecialchars($row['company']) ?></td>
-                            <td><?= htmlspecialchars($row['created_at']) ?></td>
-                            <td><?= htmlspecialchars($row['updated_at']) ?></td>
+
+
+                        <tr>
+                            <td onclick="location.href='edit.php?id=<?= $row['id'] ?>'"><?= htmlspecialchars($row['name']) ?></td>
+                            <td onclick="location.href='edit.php?id=<?= $row['id'] ?>'"><?= htmlspecialchars($row['reading']) ?></td>
+                            <td onclick="location.href='edit.php?id=<?= $row['id'] ?>'"><?= htmlspecialchars($row['company']) ?></td>
+                            <td onclick="location.href='edit.php?id=<?= $row['id'] ?>'"><?= htmlspecialchars($row['created_at']) ?></td>
+                            <td onclick="location.href='edit.php?id=<?= $row['id'] ?>'"><?= htmlspecialchars($row['updated_at']) ?></td>
                             <td>
-                                <form method="POST" action="delete.php" onsubmit="return confirm('本当に削除しますか？');">
+                                <form action="delete.php" method="POST" onsubmit="return confirmDelete(event)">
                                     <input type="hidden" name="id" value="<?= $row['id'] ?>">
                                     <button type="submit" class="btn btn-danger">×</button>
                                 </form>
                             </td>
                         </tr>
+
+
+
+
                     <?php endforeach; ?>
                 <?php endif; ?>
             </tbody>
         </table>
 
     </div>
-
+    <script>
+        function confirmDelete(event) {
+            event.stopPropagation(); // ← 編集に飛ばす処理をキャンセル！
+            return confirm("本当に削除しますか？");
+        }
+    </script>
 </body>
 
 </html>
