@@ -2,12 +2,8 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// DB接続
-try {
-    $pdo = new PDO('mysql:host=localhost;dbname=db_namecard;charset=utf8', 'root', '');
-} catch (PDOException $e) {
-    exit('DB接続失敗: ' . $e->getMessage());
-}
+require_once('funcs.php');
+$pdo = db_conn();
 
 // --- フラッシュメッセージ処理 ---
 $flash = $_GET['status'] ?? null;

@@ -1,18 +1,15 @@
 <?php
-// DB接続
-try {
-    $pdo = new PDO('mysql:host=localhost;dbname=db_namecard;charset=utf8', 'root', '');
-} catch (PDOException $e) {
-    exit('DB接続失敗: ' . $e->getMessage());
-}
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-// IDの取得とチェック
+require_once('funcs.php');
+$pdo = db_conn();
+
 $id = $_GET['id'] ?? null;
 if (!$id || !is_numeric($id)) {
     exit('無効なIDです');
 }
 
-// データ取得
 $stmt = $pdo->prepare("SELECT * FROM db_namecard WHERE id = :id");
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $stmt->execute();

@@ -1,12 +1,10 @@
 <?php
-// DB接続
-try {
-    $pdo = new PDO('mysql:host=localhost;dbname=db_namecard;charset=utf8', 'root', '');
-} catch (PDOException $e) {
-    exit('DB接続失敗: ' . $e->getMessage());
-}
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-// POSTデータの受け取り
+require_once('funcs.php');
+$pdo = db_conn();
+
 $name = $_POST['name'] ?? '';
 $reading = $_POST['reading'] ?? '';
 $company = $_POST['company'] ?? '';
@@ -16,7 +14,6 @@ $twitter = $_POST['twitter'] ?? '';
 $facebook = $_POST['facebook'] ?? '';
 $note_id = $_POST['note_id'] ?? '';
 
-// SQL実行（プリペアドステートメント）
 $sql = "INSERT INTO db_namecard (name, reading, company, date, note, twitter, facebook, note_id)
         VALUES (:name, :reading, :company, :date, :note, :twitter, :facebook, :note_id)";
 $stmt = $pdo->prepare($sql);
@@ -31,7 +28,6 @@ $stmt->bindValue(':note_id', $note_id);
 
 $status = $stmt->execute();
 
-// 結果によって遷移
 if ($status) {
     header("Location: index.php?status=registered");
     exit;
